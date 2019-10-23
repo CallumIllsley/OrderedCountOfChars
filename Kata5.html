@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mocha Tests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
+</head>
+​
+<body>
+  <!-- Mocha setup -->
+  <div id="mocha"></div>
+  <script src="https://unpkg.com/chai/chai.js"></script>
+  <script src="https://unpkg.com/mocha/mocha.js"></script>
+​
+  <script class="mocha-init">
+    mocha.setup('bdd');
+    mocha.checkLeaks();
+  </script>
+​
+  <!-- Main code -->
+  <script>
+    // write your code here
+    class OrderCount {
+        constructor(text) {
+            this.counterObj = {}      
+            this.textArr = text.split('') 
+        }
+
+        orderedCount() {
+            for(let i = 0; i < this.textArr.length; i++) {
+                this.currentLetter = this.textArr[i];
+                console.log(`Current Letter is ${this.currentLetter} `)
+
+                if (this.counterObj[this.currentLetter]) {
+                    this.counterObj[this.currentLetter] +=1;
+                    console.log(`${this.counterObj.currentLetter}`)
+                    continue;
+                } else {
+                    this.counterObj[this.currentLetter] = 1;
+                    console.log(`VALUE: ${this.counterObj.currentLetter}`)
+                    continue;
+                }
+
+        
+            }
+        }
+    }
+
+  </script>
+​
+  <!-- tests -->
+  <script>
+    const expect = chai.expect
+  </script>
+  <script>
+    // write your tests here
+    describe("Counter", () => {
+        it("adds 1 to value of the letter", () => {
+            let test = "abracadabra"
+            testCount = new OrderCount(test)
+            testCount.orderedCount()
+
+            expect(testCount.counterObj).to.deep.equal({'a' : 5, 'b' : 2, 'r' : 2, 'c' : 1, 'd' : 1})
+        })
+    })
+
+  </script>
+  <script class="mocha-exec">
+    mocha.run();
+  </script>
+</body>
+​
+</html>
